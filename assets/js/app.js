@@ -43,7 +43,7 @@ import { Spinner } from './spin.js';
   var map = new mapboxgl.Map({
     container: 'map',
     hash: true,
-    style: 'mapbox://styles/mapbox/light-v10',
+    style: 'mapbox://styles/mapbox/light-v10', // TODO: update as needed
     customAttribution: '<a href="https://chadlawlis.com">Chad Lawlis</a>'
   });
 
@@ -242,7 +242,7 @@ import { Spinner } from './spin.js';
       layerInput.type = 'radio';
       layerInput.name = 'base-layer';
       layerInput.value = l.label.toLowerCase();
-      if (l.label === 'Light') { // Set Light style to checked by default (given loaded on landing); TODO: update as needed
+      if (l.label === 'Light') { // Set Light style to checked by default (given loaded on landing); TODO: update to match initial style
         layerInput.checked = true;
       }
       layerDiv.appendChild(layerInput);
