@@ -92,20 +92,9 @@ import { Spinner } from './spin.js';
 
   // Trigger mapData() on map style load (ensures data persists when map style changed)
   map.on('style.load', function () {
-    if (data) {
-      mapData(data);
-    }
-  });
-
-  map.on('load', function () {
-  // Set minZoom as floor of (rounded down to nearest integer from) fitBounds zoom
-    var minZoom = map.getZoom();
-    map.setMinZoom(Math.floor(minZoom));
-
     mapLayers = map.getStyle().layers;
 
-    // TODO: choose between setting firstLabelLayer or firstBoundaryLayer (below), depending on need
-
+    // TODO: remove if not needed
     // Find the index of the settlement-label layer in the loaded map style, to place added layers below
     for (let i = 0; i < mapLayers.length; i++) {
       if (mapLayers[i].id === 'settlement-label') {
@@ -114,6 +103,7 @@ import { Spinner } from './spin.js';
       }
     }
 
+    // TODO: remove if not needed
     // Find the index of the first admin/boundary layer in the loaded map style, to place counties layers below
     for (let i = 0; i < mapLayers.length; i++) {
       if (mapLayers[i]['source-layer'] === 'admin') {
@@ -121,6 +111,18 @@ import { Spinner } from './spin.js';
         break;
       }
     }
+
+    // TODO: update data source object + function name as needed
+    // add statements for other sources/layers as needed
+    if (data) {
+      mapData();
+    }
+  });
+
+  map.on('load', function () {
+    // Set minZoom as floor of (rounded down to nearest integer from) fitBounds zoom
+    var minZoom = map.getZoom();
+    map.setMinZoom(Math.floor(minZoom));
 
     // Add zoom and rotation controls
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }));
